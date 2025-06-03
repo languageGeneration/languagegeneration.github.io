@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial on Language Generation in the Limit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- ====== THEME VARIABLES =============================== -->
+  <style>
+    :root{
+      /* Color scheme */
+      --primary-color:   #4E6688; /*#0d47a1;*/
+      --accent-color :    #1976d2;
+      --secondary-color: #E3EEB2;
+      --title-color: #fff; /*#ffffff;*/
+      --subtitle-color: #fff; /*#ffffff;*/
+      --text-color:      #222;
+
+      --light-bg: #fffff1;/* #edf7e0; /* #ffffff; /*var(--accent-color);*/
+      
+      /* Link colours as requested.  We apply brightness filters rather than separate hexes so the shade stays in sync. */
+      --link-base: rgb(255, 104, 34); /*#00aaff;           /* cyan base */
+
+      /* Palatino-style serif for both headers and body */
+      --header-font:"Palatino Linotype","Book Antiqua",Palatino,"URW Palladio L","EB Garamond",serif;
+      --body-font  :"Palatino Linotype","Book Antiqua",Palatino,"URW Palladio L","EB Garamond",serif;
+      /* --header-font: 'Palatino Linotype','Book Antiqua',Palatino,serif;
+      --body-font:   'Palatino Linotype','Book Antiqua',Palatino,serif; */
+    }
+
+    /* ======= BASIC RESET ======= */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--body-font);line-height:1.6;color:var(--text-color);background:var(--secondary-color)}
+
+    /* ======= PAGE TOP BANNER ======= */
+    .page-header{background:var(--primary-color);text-align:center;padding:2.5rem 1rem 2rem}
+    .page-header h1{font-family:var(--header-font);font-size:3.5rem;font-weight:700;margin-bottom:.7rem;color:var(--title-color)}
+    .page-header h3{font-family:var(--header-font);font-size:2rem;margin-bottom:.5rem;color:var(--title-color)}
+    .page-header p{font-size:1.5rem;color:var(--subtitle-color)}
+
+    .hero h3{font-size:1.35rem;font-weight:600;}
+    .hero p{margin-top:1.5rem;font-size:1.05rem;}
+
+    /* ======= NAVIGATION BAR ======= */
+    .navbar{display:flex;align-items:center;justify-content:space-between;background:var(--primary-color);color:var(--secondary-color);padding:.6rem 1rem;position:sticky;top:0;z-index:1000}
+    .navbar .brand{font-family:var(--header-font);font-size:1.25rem;font-weight:600}
+    .navbar ul{display:flex;list-style:none}
+    .navbar li{margin-left:1rem}
+    .navbar a{color:var(--secondary-color);text-decoration:none;font-weight:300}
+    .navbar a:hover,.navbar a:focus{color:#cbe0ff}
+
+    /* === GLOBAL LINK STYLE === */
+    a{color:var(--link-base);filter:brightness(90%);text-decoration:none;}
+    a:hover,a:focus{filter:brightness(100%);text-decoration:none;}
+
+    /* === OTHER MINOR TWEAKS === */
+    .citation{color:var(--title-color);filter:brightness(60%);font-style:italic;}
+
+    /* === FLEX WRAP CARDS (speakers and organisers) === */
+    .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.6rem;}
+    .card{background:none;border:none;max-width:220px;text-align:center;}
+    .card-img{width:100%;max-width:200px;height:200px;border-radius:50%;object-fit:cover;margin:0 auto;}
+    .card-name{display:block;margin-top:.45rem;font-weight:600;white-space:nowrap;}
+    .card-affil{font-size:.9rem;}
+
+    /* ======= SECTIONS ======= */
+    section{padding:1rem 1.5rem; max-width:900px;margin:auto; margin-bottom: 2em;}
+    section:nth-of-type(odd){background:var(--light-bg)}
+    h2{font-family:var(--header-font);color:var(--text-color);margin-bottom:1rem;display:flex;align-items:center;font-size:1.75rem}
+    h2 i{margin-right:.6rem;color:var(--accent-color)}
+
+    /* citation style */
+    .citation{color:inherit;font-style:italic;filter:inherit}
+
+    /* === BADGE STYLE === */
+    .badge{
+      display:inline-block;
+      background:var(--link-base);
+      color:#fff;
+      border-radius:4px;
+      padding:0.0rem 0.15rem;
+      font-size:0.85rem;
+      font-weight:600;
+      font-style: normal;
+      margin-left:0.3rem;
+      white-space:nowrap;
+    }
+
+    /* Organizers list */
+    .organizers{list-style:none;padding-left:0}
+    .organizers li{margin-bottom:.5rem}
+
+    /* ======= FOOTER ======= */
+    footer{text-align:center;font-size:.9rem;background:var(--primary-color);color:var(--secondary-color);padding:2rem 1rem}
+
+    /* === Indent bullet lists in resources === */
+    #resources ul{padding-left:2rem;list-style-position:outside}
+
+    /* ======= MOBILE NAV TOGGLE ======= */
+    #nav-toggle{display:none}
+    .nav-toggle-label{display:none;width:30px;height:21px;cursor:pointer;position:relative}
+    .nav-toggle-label span,.nav-toggle-label span::before,.nav-toggle-label span::after{position:absolute;width:100%;height:3px;border-radius:3px;background:var(--secondary-color);transition:.3s}
+    .nav-toggle-label span{top:9px}
+    .nav-toggle-label span::before{content:'';top:-9px}
+    .nav-toggle-label span::after{content:'';top:9px}
+    @media(max-width:700px){.navbar ul{position:absolute;left:0;top:100%;width:100%;flex-direction:column;background:var(--primary-color);max-height:0;overflow:hidden;transition:max-height .3s ease-out}#nav-toggle:checked ~ ul{max-height:300px}#nav-toggle:checked + .nav-toggle-label span{background:transparent}#nav-toggle:checked + .nav-toggle-label span::before{transform:translateY(9px) rotate(45deg)}#nav-toggle:checked + .nav-toggle-label span::after{transform:translateY(-9px) rotate(-45deg)}.nav-toggle-label{display:block}.navbar li{margin:1rem 0}}
+  </style>
+</head>
+
+<body>
+  <!-- ======= TOP NAV ======= -->
+  <header class="navbar">
+    <div class="brand">LangGen'25</div>
+    <input type="checkbox" id="nav-toggle">
+    <label class="nav-toggle-label" for="nav-toggle"><span></span></label>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#recordings">Recordings & Slides</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+    </ul>
+  </header>
+
+  <!-- ======= PAGE HEADER ======= -->
+  <div class="page-header">
+    <h1>Language Generation in the Limit</h1>
+    <h3>Tutorial @ <a href="https://learningtheory.org/colt2025/" style="color: inherit; filter: brightness(100%);text-decoration: none;">COLT 2025</a></h3>
+    <br>
+    <p>30 June, 2025 &nbsp; · &nbsp; Lyon, France</p>
+  </div>
+
+    <br>
+    <br>
+    <br>
+    
+    <section id="overview"> 
+      <p>Large Language Models (LLMs) have demonstrated remarkable capabilities in generating coherent text, yet a theoretical understanding of why they work remains elusive.</p>
+      <br>
+      <p>
+        The question of understanding language generation is not new. Computer scientists have been fascinated by the ability of humans and certain machines to generate natural language for decades, dating back to early work by Shannon. Here, an important line of work was initiated by  <a href="https://www.sciencedirect.com/science/article/pii/S0019995867911655"><span class="citation">Gold (1967)</span></a> – who introduced a formal model of language identification in the limit, which received extensive study in learning theory (e.g., <a href="https://www.sciencedirect.com/science/article/pii/S0019995880902855"><span class="citation">Angluin (1980)</span></a>) and in linguistics.</p>
+<br>
+      <p>
+        This tutorial covers a recently proposed formal framework for language generation; a modern take on classical work on language identification. 
+        Specifically, we explore the model of "language generation in the limit" recently proposed by <a href="https://arxiv.org/abs/2404.06757"><span class="citation">Kleinberg and Mullainathan (2024)</span></a>, which offers a surprising positive result: even with minimal requirements, coherent language generation is possible after observing finitely many samples – a finding that stands  in stark contrast to the negative findings on language identification established by <a href="https://www.sciencedirect.com/science/article/pii/S0019995867911655"><span class="citation">Gold (1967)</span></a> and <a href="https://www.sciencedirect.com/science/article/pii/S0019995880902855"><span class="citation">Angluin (1980)</span></a>.</p>
+<br>
+      <p>Our tutorial aims to introduce this emerging theoretical framework to the broader computational learning theory community, stimulating new research that bridges formal theory and practical language models. <em>No prior knowledge of language generation models is required</em>; basic mathematical maturity is sufficient.</p>
+    </section>
+
+    <section id="recordings"> 
+      <h2><i class="fa-solid fa-book" style="color:var(--text-color)"></i>Slides and Materials</h2>
+      <p>All tutorial materials, including slides, will be made available on this website following the event. Please check back!</p>
+    </section>
+
+    <section id="resources">
+      <h2><i class="fas fa-book-open" style="color:var(--text-color)"></i>Resources</h2>
+
+      <p>Alongside the COLT 2025 tutorial, we are preparing an annotated reading list for participants exploring language generation in greater depth. Below is a list of recent (and rapidly growing) lines of works on language generation in the limit. The list is still under preparation, please check back frequently.</p>
+      <br>
+      <br>
+      <b>Selected works on Language Identification in the Limit</b>
+      <ul>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S0019995867911655"><em>Language Identification in the Limit</em></a> — <span class="citation">E. Mark Gold  <span class="badge">Information and Control 1967</span></span></li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S0019995880902855"><em>Inductive Inference of Formal Languages from Positive Data</em></a> — <span class="citation">Dana Angluin <span class="badge">Information and Control 1980</span></span></li>
+        <li><a href="https://doi.org/10.1145/800135.804406"><em>Finding Patterns Common to a Set of Strings</em></a> — <span class="citation">Dana Angluin <span class="badge">STOC 1979</span></span></li>
+        <li><a href="https://en.wikipedia.org/wiki/Language_identification_in_the_limit"><em>Language identification in the limit</em></a> — <span class="citation">Wikipedia</span></li>
+      </ul>
+      <br>
+      <b>Language Generation in the Limit</b>
+      <ul>
+        <li><a href="https://arxiv.org/abs/2404.06757"><em>Language Generation in the Limit</em></a> — <span class="citation">Jon Kleinberg and Sendhil Mullainathan <span class="badge">NeurIPS 2024</span></span></li>
+        <li><a href="https://arxiv.org/abs/2410.13714"><em>Generation through the Lens of Learning Theory</em></a> — <span class="citation">Jiaxun Li, Vinod Raman and Ambuj Tewari <span class="badge">COLT 2025</span></span></li>
+        <li><a href="https://arxiv.org/abs/2501.04179"><em>Generation from Noisy Examples</em></a> — <span class="citation">Ananth Raman and Vinod Raman <span class="badge">ICML 2025</span></span></li>
+      </ul>
+      <br>
+      <b>Language Generation in the Limit with Breadth</b>
+      <ul>
+        <li><a href="https://arxiv.org/abs/2411.09642"><em>On the Limits of Language Generation: Trade‑Offs Between Hallucination and Mode Collapse</em></a> — <span class="citation">Alkis Kalavasis, Anay Mehrotra and Grigoris Velegkas <span class="badge">STOC 2025</span></span></li>
+        <li><a href="https://arxiv.org/abs/2411.15364"><em>Exploring Facets of Language Generation in the Limit</em></a> — <span class="citation">Moses Charikar and Chirag Pabbaraju <span class="badge">COLT 2025</span></span></li>
+        <li><a href="https://arxiv.org/abs/2412.18530"><em>Characterizations of Language Generation With Breadth</em></a> — <span class="citation">Alkis Kalavasis, Anay Mehrotra and Grigoris Velegkas <span class="badge">arXiv 2024</span></span></li>
+        <li><a href="https://arxiv.org/abs/2505.21819"><em>Representative Language Generation</em></a> — <span class="citation">Charlotte Peale, Vinod Raman and Omer Reingold <span class="badge">ICML 2025</span></span></li>
+        <li><a href="https://arxiv.org/abs/2504.14370"><em>Density Measures for Language Generation</em></a> — <span class="citation">Jon Kleinberg and Fan Wei <span class="badge">arXiv 2025</span></span></li>
+      </ul>
+      <br>
+      <b>Relevant Talks</b>
+      <ul>
+        <li><a href="https://simons.berkeley.edu/talks/jon-kleinberg-cornell-university-2024-09-25"><em>Language Generation in the Limit</em></a> — <span class="citation">Jon Kleinberg at Simons Berkeley</span></li>
+        <li><a href="https://www.ias.edu/video/language-generation-limit"><em>Language Generation in the Limit</em></a> — <span class="citation">Jon Kleinberg at IAS</span></li>
+        <li><em>Generation Through the Lens of Learning Theory</em> — Vinod Raman <a href="./static/gen_LT.pdf">[slides]</a></li>
+        <li><em>Inherent Trade-offs in Language Generation</em> — Anay Mehrotra and Grigoris Velegkas <a href="./static/2025-May-Language-Generation.pdf">[slides 1]</a> <a href="">[slides 2]</a></li>
+      </ul>
+    </section>
+
+    <!-- === ORGANISERS  (now with photos) === -->
+  <section id="organizers">
+    <h2><i class="fas fa-user-friends" style="color:var(--text-color)"></i>Organizers</h2>
+    <div class="card-grid">
+      <div class="card organizer-card">
+        <a href="https://profiles.stanford.edu/moses-charikar" style="color: inherit;">
+            <img src="./organizers/moses.jpg" alt="Moses Charikar" class="card-img">
+            <span class="card-name">Moses Charikar</span>
+            <span class="card-affil">Stanford University</span>
+        </a>
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="card organizer-card">
+        <a href="https://anaymehrotra.com/"  style="color: inherit;">
+        <img src="./organizers/anay.jpg" alt="Anay Mehrotra" class="card-img">
+        <span class="card-name">Anay Mehrotra</span>
+        <span class="card-affil">Yale University</span>
+        </a>
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="card organizer-card">
+        <a href="https://cpeale.github.io/"  style="color: inherit;">
+        <img src="./organizers/charlotte.jpg" alt="Charlotte Peale" class="card-img">
+        <span class="card-name">Charlotte Peale</span>
+        <span class="card-affil">Stanford University</span>
+        </a>
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="card organizer-card">
+        <a href="https://web.stanford.edu/~cpabbara/"  style="color: inherit;">
+            <img src="./organizers/chirag.jpg" alt="Chirag Pabbaraju" class="card-img">
+            <span class="card-name">Chirag Pabbaraju</span>
+            <span class="card-affil">Stanford University</span>
+        </a>
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="card organizer-card">
+        <a href="https://gvelegkas.github.io/"  style="color: inherit;">
+            <img src="./organizers/grigoris.jpg" alt="Grigoris Velegkas" class="card-img">
+            <span class="card-name">Grigoris Velegkas</span>
+            <span class="card-affil">Yale University / Google Research</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    COLT 2025  Tutorial • Last updated May 17, 2025
+  </footer>
+</body>
+</html>
