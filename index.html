@@ -152,7 +152,42 @@
 
     <section id="recordings"> 
       <h2><i class="fa-solid fa-book" style="color:var(--text-color)"></i>Slides and Materials</h2>
-      <p>All tutorial materials, including slides, will be made available on this website following the event. Please check back!</p>
+      <p>All tutorial slides are below. Recordings from the tutorial are coming soon. Please check back!</p>
+
+
+      <div class="pdf-grid">
+
+        <div class="pdf-card" data-pdf="./static/tutorial-slides/Slides-Talk-1-Moses.pdf">
+          <img class="pdf-thumb" src="./static/tutorial-slides/thumbnails/talk1.png" alt="Preview">
+          <!-- <i class="fa-regular fa-file-pdf pdf-icon"></i> -->
+          <span class="pdf-title">Language Generation and Learning Theory</span>
+        </div>
+
+        <div class="pdf-card" data-pdf="./static/tutorial-slides/Slides-Talk-2-Chirag.pdf">
+          <img class="pdf-thumb" src="./static/tutorial-slides/thumbnails/talk2.png" alt="Preview">
+          <!-- <i class="fa-regular fa-file-pdf pdf-icon"></i> -->
+          <span class="pdf-title">Stronger Notions of Generation and Comparison to Prediction</span>
+        </div>
+
+        <div class="pdf-card" data-pdf="./static/tutorial-slides/Slides-Talk-3-Anay.pdf">
+          <img class="pdf-thumb" src="./static/tutorial-slides/thumbnails/talk3.png" alt="Preview">
+          <!-- <i class="fa-regular fa-file-pdf pdf-icon"></i> -->
+          <span class="pdf-title">Validity–Breadth Trade-Off (Part I)</span>
+        </div>
+
+        <div class="pdf-card" data-pdf="./static/tutorial-slides/Slides-Talk-4-Grigoris.pdf">
+          <img class="pdf-thumb" src="./static/tutorial-slides/thumbnails/talk4.png" alt="Preview">
+          <!-- <i class="fa-regular fa-file-pdf pdf-icon"></i> -->
+          <span class="pdf-title">Validity–Breadth Trade-Off (Part II)</span>
+        </div>
+
+        <div class="pdf-card" data-pdf="./static/tutorial-slides/Slides-Talk-5-Charlotte.pdf">
+          <img class="pdf-thumb" src="./static/tutorial-slides/thumbnails/talk5.png" alt="Preview">
+          <!-- <i class="fa-regular fa-file-pdf pdf-icon"></i> -->
+          <span class="pdf-title">Diverse and Robust Generation</span>
+        </div>
+ 
+  </div>
     </section>
 
     <section id="resources">
@@ -195,10 +230,84 @@
         <li><em>Generation Through the Lens of Learning Theory</em> — Jiaxun Li <a href="./static/LanguageGeneration-Jiaxun.pdf">[slides]</a> and Vinod Raman <a href="./static/LanguageGeneration-Vinod.pdf">[slides]</a></li>
         <li><em>Exploring Facets of Language Generation in the Limit</em> — Chirag Pabbaraju <a href="./static/LanguageGeneration-Chirag.pdf">[slides]</a></li>
         <li><a href="https://www.youtube.com/watch?v=kBsTBL7jB4A"><em>On the Limits of Language Generation</em></a> — Anay Mehrotra and Grigoris Velegkas, STOC online talk <a href="./static/LanguageGeneration-Anay-Grigoris-STOC25.pdf">[slides]</a> (for more recent results, but only in the online setting, see: <a href="./static/LanguageGeneration-Grigoris.pdf">[slides 1]</a> <a href="./static/LanguageGeneration-Anay.pdf">[slides 2]</a>)</li>
+        <li>
+          <a href="https://icml.cc/virtual/2025/invited-talk/39862"><em>AI's Models of the World, and Ours</em></a>
+          — <span class="citation">Jon Kleinberg; ICML Invited Talk (Registration Required)</span>
+        </li>
       </ul>
-    </section>
+    </section> 
+ 
 
-    <!-- === ORGANISERS  (now with photos) === -->
+<!-- ▶▶ MODAL OVERLAY -------------------------------------------------->
+<div id="pdf-modal" class="pdf-modal">
+  <div class="pdf-modal-content">
+    <span id="pdf-close" aria-label="Close viewer">&times;</span>
+    <iframe id="pdf-frame" title="PDF viewer" src="" allowfullscreen></iframe>
+    <a id="pdf-download" class="download-btn" href="" download>
+      <i class="fa-solid fa-download"></i> Download PDF
+    </a>
+  </div>
+</div>
+
+
+<!-- ▶ STYLE ---------------------------------------------------------->
+<style>
+  /* ===== Card grid ===== */
+  .pdf-grid{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1rem}
+  .pdf-card{cursor:pointer;background:#fff;border:1px solid #ddd;border-radius:6px;width:260px;max-width:100%;text-align:center;transition:transform .2s,box-shadow .2s;overflow:hidden}
+  .pdf-card:hover,.pdf-card:focus{transform:translateY(-4px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+  .pdf-thumb{width:100%;height:140px;object-fit:cover;display:block}
+  .pdf-title{display:block;padding:.6rem .8rem;font-size:.95rem;font-weight:600;color:var(--text-color);min-height:3.2rem}
+  /* Responsive width */
+  @media(max-width:600px){.pdf-card{width:100%}}
+
+  /* ===== Modal overlay ===== */
+  .pdf-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10000;padding:4vh 2vw}
+  .pdf-modal-content{position:relative;background:#fff;border-radius:8px;max-width:1000px;height:90vh;margin:auto;display:flex;flex-direction:column;overflow:hidden}
+  #pdf-close{position:absolute;top:.6rem;right:1rem;font-size:2.2rem;color:#333;cursor:pointer;line-height:1}
+  #pdf-frame{flex:1;border:none;width:100%;height:100%}
+  .download-btn{align-self:flex-start;margin:.6rem 0 0 1rem;padding:.4rem 1rem;background:var(--primary-color);border-radius:4px;color:#fff;font-weight:600;text-decoration:none}
+  .download-btn:hover,.download-btn:focus{background:var(--accent-color)}
+</style>
+
+<!-- ▶ SCRIPT --------------------------------------------------------->
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    // Open modal viewer
+    document.querySelectorAll('.pdf-card').forEach(function(card){
+      card.addEventListener('click', function(){
+        const pdfPath = this.getAttribute('data-pdf');
+        const modal   = document.getElementById('pdf-modal');
+        const frame   = document.getElementById('pdf-frame');
+        const dl      = document.getElementById('pdf-download');
+        frame.src = pdfPath;
+        dl.href   = pdfPath;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close helpers
+    function closeModal(){
+      const modal = document.getElementById('pdf-modal');
+      const frame = document.getElementById('pdf-frame');
+      modal.style.display = 'none';
+      frame.src = '';
+      document.body.style.overflow = '';
+    }
+    document.getElementById('pdf-close').addEventListener('click', closeModal);
+    document.getElementById('pdf-modal').addEventListener('click', function(e){
+      if(e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeModal();
+    });
+  });
+</script>
+
+
+
+    <!-- === ORGANIZERS === -->
   <section id="organizers">
     <h2><i class="fas fa-user-friends" style="color:var(--text-color)"></i>Organizers</h2>
     <div class="card-grid">
