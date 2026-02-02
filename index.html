@@ -108,6 +108,167 @@
     .nav-toggle-label span::before{content:'';top:-9px}
     .nav-toggle-label span::after{content:'';top:9px}
     @media(max-width:700px){.navbar ul{position:absolute;left:0;top:100%;width:100%;flex-direction:column;background:var(--primary-color);max-height:0;overflow:hidden;transition:max-height .3s ease-out}#nav-toggle:checked ~ ul{max-height:300px}#nav-toggle:checked + .nav-toggle-label span{background:transparent}#nav-toggle:checked + .nav-toggle-label span::before{transform:translateY(9px) rotate(45deg)}#nav-toggle:checked + .nav-toggle-label span::after{transform:translateY(-9px) rotate(-45deg)}.nav-toggle-label{display:block}.navbar li{margin:1rem 0}}
+
+
+/* ===== Reading list controls ===== */
+.paper-controls{
+  margin: 1.25rem 0 1.1rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,.55);
+}
+
+.paper-controls-row{
+  display: flex;
+  gap: .7rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.paper-controls-row-2{
+  margin-top: .75rem;
+  justify-content: space-between;
+}
+
+.paper-search-label{font-weight:600;}
+.paper-search{
+  flex: 1;
+  min-width: 220px;
+  padding: .55rem .7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,.2);
+  font-family: var(--body-font);
+  font-size: 1rem;
+  background: #fff;
+}
+
+.paper-clear{
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  border-radius: 8px;
+  padding: .52rem .75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.paper-clear:hover{filter:brightness(98%);}
+
+.paper-sort label{font-weight:600;margin-right:.35rem;}
+.paper-sort select{
+  padding: .42rem .5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,.2);
+  background:#fff;
+  font-family: var(--body-font);
+}
+
+.paper-checkbox{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  user-select:none;
+}
+
+.paper-count{
+  font-weight: 600;
+  opacity: .85;
+}
+
+/* ===== Tag chips ===== */
+.paper-tag-bar{
+  margin-top: .85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+
+.tag-chip{
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  color: var(--text-color);
+  border-radius: 999px;
+  padding: .25rem .6rem;
+  font-size: .92rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tag-chip:hover{filter:brightness(98%);}
+
+.tag-chip.active{
+  background: var(--link-base);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* ===== Paper rendering ===== */
+.paper-section-title{
+  margin: 1.2rem 0 .45rem 0;
+  font-family: var(--header-font);
+  font-size: 1.15rem;
+}
+
+.paper-list{
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 1rem 0;
+}
+
+.paper-item{
+  padding: .5rem .2rem;
+  border-bottom: 1px dashed rgba(0,0,0,.15);
+}
+
+.paper-meta{
+  display: block;
+  margin-top: .12rem;
+  opacity: .92;
+}
+
+.paper-tags{
+  margin-top: .35rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem;
+}
+
+.paper-tag{
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  border-radius: 999px;
+  padding: .15rem .5rem;
+  font-size: .86rem;
+  cursor: pointer;
+}
+
+.paper-tag:hover{filter:brightness(98%);}
+
+.section-header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-bottom:.25rem;
+}
+
+.section-toggle-btn{
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  border-radius: 999px;
+  padding: .35rem .7rem;
+  font-weight: 700;
+  cursor: pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+}
+
+.section-toggle-btn:hover{filter:brightness(98%);}
+
+
+
   </style>
 </head>
 
@@ -150,170 +311,190 @@
       <p>Our tutorial aims to introduce this emerging theoretical framework to the broader computational learning theory community, stimulating new research that bridges formal theory and practical language models. <em>No prior knowledge of language generation models is required</em>; basic mathematical maturity is sufficient.</p>
     </section>
 
-    <section id="recordings"> 
-      <h2><i class="fa-solid fa-video" style="color:var(--text-color)"></i>Videos and Materials</h2>
-      <p>Watch the full tutorial recordings and download the presentation slides below.</p>
 
-      <div class="talk-grid">
 
-        <div class="talk-card">
-          <div class="talk-header">
-            <div class="talk-info">
-              <h3 class="talk-title">Talk 1: Language Generation and Learning Theory</h3>
-              <span class="talk-speaker">Moses Charikar</span>
-            </div>
-            <button class="pdf-btn" data-pdf="./static/tutorial-slides/Slides-Talk-1-Moses.pdf">
-              <i class="fa-solid fa-file-pdf"></i> View Slides
-            </button>
+
+
+
+<section id="recordings"> 
+  <div class="section-header-row">
+    <h2><i class="fa-solid fa-video" style="color:var(--text-color)"></i>Videos and Materials</h2>
+    <button id="talks-toggle" class="section-toggle-btn" type="button" aria-expanded="false">
+      <i class="fa-solid fa-chevron-down"></i> Show videos and materials
+    </button>
+  </div>
+
+  <p>Watch the full tutorial recordings and download the presentation slides below.</p>
+
+  <!-- Hidden by default -->
+  <div id="talks-wrapper" hidden>
+    <div class="talk-grid">
+
+      <div class="talk-card">
+        <div class="talk-header">
+          <div class="talk-info">
+            <h3 class="talk-title">Talk 1: Language Generation and Learning Theory</h3>
+            <span class="talk-speaker">Moses Charikar</span>
           </div>
-          <div class="talk-content">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/kfkMC0HYLBY" 
-                      title="Talk 1: Language Generation and Learning Theory" 
-                      frameborder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowfullscreen>
-              </iframe>
-            </div>
+          <button class="pdf-btn" type="button" data-pdf="./static/tutorial-slides/Slides-Talk-1-Moses.pdf">
+            <i class="fa-solid fa-file-pdf"></i> View Slides
+          </button>
+        </div>
+        <div class="talk-content">
+          <div class="video-wrapper">
+            <iframe data-src="https://www.youtube.com/embed/kfkMC0HYLBY" 
+                    title="Talk 1: Language Generation and Learning Theory" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
           </div>
         </div>
-
-        <div class="talk-card">
-          <div class="talk-header">
-            <div class="talk-info">
-              <h3 class="talk-title">Talk 2: Stronger Notions of Generation and Comparison to Prediction</h3>
-              <span class="talk-speaker">Chirag Pabbaraju</span>
-            </div>
-            <button class="pdf-btn" data-pdf="./static/tutorial-slides/Slides-Talk-2-Chirag.pdf">
-              <i class="fa-solid fa-file-pdf"></i> View Slides
-            </button>
-          </div>
-          <div class="talk-content">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/ZWCqId1Wu1k" 
-                      title="Talk 2: Stronger Notions of Generation" 
-                      frameborder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-        </div>
-
-        <div class="talk-card talk-combined">
-          <div class="talk-header">
-            <div class="talk-info">
-              <h3 class="talk-title">Talks 3 & 4: Validity–Breadth Trade-Off (Parts I & II)</h3>
-              <span class="talk-speaker">Anay Mehrotra & Grigoris Velegkas</span>
-            </div>
-            <div class="talk-actions-top">
-              <button class="pdf-btn" data-pdf="./static/tutorial-slides/Slides-Talk-3-Anay.pdf">
-                <i class="fa-solid fa-file-pdf"></i> Part I Slides
-              </button>
-              <button class="pdf-btn" data-pdf="./static/tutorial-slides/Slides-Talk-4-Grigoris.pdf">
-                <i class="fa-solid fa-file-pdf"></i> Part II Slides
-              </button>
-            </div>
-          </div>
-          <div class="talk-content">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/-LHEymSNA2k" 
-                      title="Talks 3 & 4: Validity–Breadth Trade-Off" 
-                      frameborder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-        </div>
-
-        <div class="talk-card">
-          <div class="talk-header">
-            <div class="talk-info">
-              <h3 class="talk-title">Talk 5: Diverse and Robust Generation</h3>
-              <span class="talk-speaker">Charlotte Peale</span>
-            </div>
-            <button class="pdf-btn" data-pdf="./static/tutorial-slides/Slides-Talk-5-Charlotte.pdf">
-              <i class="fa-solid fa-file-pdf"></i> View Slides
-            </button>
-          </div>
-          <div class="talk-content">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/5bO2OSc5LKg" 
-                      title="Talk 5: Diverse and Robust Generation" 
-                      frameborder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </section>
 
-    <section id="resources">
-      <h2><i class="fas fa-book-open" style="color:var(--text-color)"></i>Resources</h2>
+      <div class="talk-card">
+        <div class="talk-header">
+          <div class="talk-info">
+            <h3 class="talk-title">Talk 2: Stronger Notions of Generation and Comparison to Prediction</h3>
+            <span class="talk-speaker">Chirag Pabbaraju</span>
+          </div>
+          <button class="pdf-btn" type="button" data-pdf="./static/tutorial-slides/Slides-Talk-2-Chirag.pdf">
+            <i class="fa-solid fa-file-pdf"></i> View Slides
+          </button>
+        </div>
+        <div class="talk-content">
+          <div class="video-wrapper">
+            <iframe data-src="https://www.youtube.com/embed/ZWCqId1Wu1k" 
+                    title="Talk 2: Stronger Notions of Generation" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
 
-      <p>Alongside the COLT 2025 tutorial, we are preparing a reading list for participants exploring language generation in greater depth. Below is a list of recent (and rapidly growing) lines of works on language generation in the limit. The list is being actively updated, please check back for new papers (and email Anay to add papers to this list).</p>
-      <br>
-      <br>
-      <b>Selected Works and Surveys on Language Identification in the Limit</b>
-      <ul>
-        <li><a href="https://www.sciencedirect.com/science/article/pii/S0019995867911655"><em>Language Identification in the Limit</em></a> — <span class="citation">E. Mark Gold  <span class="badge">Information and Control 1967</span></span></li>
-        <li><a href="https://www.sciencedirect.com/science/article/pii/S0019995880902855"><em>Inductive Inference of Formal Languages from Positive Data</em></a> — <span class="citation">Dana Angluin <span class="badge">Information and Control 1980</span></span></li>
-        <li><a href="https://doi.org/10.1145/800135.804406"><em>Finding Patterns Common to a Set of Strings</em></a> — <span class="citation">Dana Angluin <span class="badge">STOC 1979</span></span></li>
-	<li><a href="https://dl.acm.org/doi/abs/10.1145/356914.356918"><em>Inductive Inference: Theory and Methods</em></a> — <span class="citation">Data Angluin and Carl H. Smith <span class="badge">ACM Computing Survey 1983</span></span>
-	<li><a href="https://www.sciencedirect.com/science/article/pii/S0304397508001503"><em>Learning indexed families of recursive languages from positive data: A survey</em></a> <span class="citation">Steffen Lange, Thomas Zeugmann, and Thomas Zeugmann <span class="badge">TCS</span></span>
-        <li><a href="https://en.wikipedia.org/wiki/Language_identification_in_the_limit"><em>Language identification in the limit</em></a> <span class="citation"><span class="badge">Wikipedia</span></span></li>
-      </ul>
-      <br>
-      <b>Works on Language Generation in the Limit</b>
-      <ul>
-        <li><a href="https://arxiv.org/abs/2404.06757"><em>Language Generation in the Limit</em></a> — <span class="citation">Jon Kleinberg and Sendhil Mullainathan <span class="badge">NeurIPS 2024</span></span></li>
-        <li><a href="https://arxiv.org/abs/2410.13714"><em>Generation through the Lens of Learning Theory</em></a> — <span class="citation">Jiaxun Li, Vinod Raman, and Ambuj Tewari <span class="badge">COLT 2025</span></span></li>
-        <li><a href="https://arxiv.org/abs/2501.04179"><em>Generation from Noisy Examples</em></a> — <span class="citation">Ananth Raman and Vinod Raman <span class="badge">ICML 2025</span></span></li>
-	<li><a href="https://arxiv.org/abs/2506.18642"><em>On Union-Closedness of Language Generation</em></a> — <span class="citation">Steve Hanneke, Amin Karbasi, Anay Mehrotra, and Grigoris Velegkas<span class="badge">NeurIPS 2025</span></span></li>
-	<li><a href="https://arxiv.org/abs/2507.15319"><em>Language Generation in the Limit: Noise, Loss, and Feedback</em></a> — <span class="citation">Yannan Bai, Debmalya Panigrahi, Ian Zhang<span class="badge">SODA 2026</span></span></li>
-	<li><a href="https://arxiv.org/abs/2510.02795"><em>Pareto-optimal Non-uniform Language Generation</em></a> — <span class="citation">Moses Charikar and Cirag Pabbaraju<span class="badge">ALT 2026</span></span></li>
-	<li><a href="https://arxiv.org/abs/2511.05759"><em>Language Generation: Complexity Barriers and Implications for Learning</em></a> — <span class="citation">Marcelo Arenas, Pablo Barceló, Luis Cofré, Alexander Kozachinskiy<span class="badge">arXiv 2025</span></span></li>
-	<li><a href="https://arxiv.org/abs/2511.07417"><em>Language Generation with Infinite Contamination</em></a> — <span class="citation">Anay Mehrotra, Grigoris Velegkas, Xifan Yu, and Felix Zhou<span class="badge">arXiv 2025</span></span></li>
-      </ul>
-      <br>
-      <b>Works on Language Generation in the Limit with Breadth</b>
-      <ul>
-        <li><a href="https://arxiv.org/abs/2411.09642"><em>On the Limits of Language Generation: Trade‑Offs Between Hallucination and Mode Collapse</em></a> — <span class="citation">Alkis Kalavasis, Anay Mehrotra, and Grigoris Velegkas <span class="badge">STOC 2025</span></span></li>
-        <li><a href="https://arxiv.org/abs/2411.15364"><em>Exploring Facets of Language Generation in the Limit</em></a> — <span class="citation">Moses Charikar and Chirag Pabbaraju <span class="badge">COLT 2025</span></span></li>
-        <li><a href="https://arxiv.org/abs/2412.18530"><em>Characterizations of Language Generation With Breadth</em></a> — <span class="citation">Alkis Kalavasis, Anay Mehrotra, and Grigoris Velegkas <span class="badge">ALT 2026</span></span></li>
-        <li><a href="https://arxiv.org/abs/2505.21819"><em>Representative Language Generation</em></a> — <span class="citation">Charlotte Peale, Vinod Raman, and Omer Reingold <span class="badge">ICML 2025</span></span></li>
-        <li><a href="https://arxiv.org/abs/2504.14370"><em>Density Measures for Language Generation</em></a> — <span class="citation">Jon Kleinberg and Fan Wei <span class="badge">FOCS 2025</span></span></li>
-        <li><a href="https://arxiv.org/abs/2511.05295"><em>Language Generation and Identification From Partial Enumeration: Tight Density Bounds and Topological Characterizations </em></a> — <span class="citation">Jon Kleinberg and Fan Wei <span class="badge">arXiv 2025</span></span></li>
-      </ul>
-      <br>
-      <br>
-      <b>Recent Works on Language Identification in the Limit</b>
-      <ul>
-        <li><a href="https://arxiv.org/abs/2506.15543"><em>Learning Algorithms in the Limit</em></a> — <span class="citation">Hristo Papazov and Nicolas Flammarion<span class="badge">COLT 2025</span></span></li>
-        <li><a href="https://arxiv.org/abs/2511.04103"><em>A Characterization of List Language Identification in the Limit</em></a> — <span class="citation">Moses Charikar, Chirag Pabbaraju, and Ambuj Tewari <span class="badge">arXiv 2025</span></span></li>
-      </ul>
-      <br>
-      <br>
-      <b>Relevant Talks</b>
-      <ul>
-        <li>Jon Kleinberg:&nbsp; "Language Generation in the Limit" at <a href="https://simons.berkeley.edu/talks/jon-kleinberg-cornell-university-2024-09-25"><em>Simons Institute</em>,</a> <a href="https://www.ias.edu/video/language-generation-limit"><em>IAS</em>,</a > and <a href="https://www.youtube.com/watch?v=VGqlKwIkDk8&list=PLArBKNfJxuunT9mVhqMjZM1qA6rs1cxGO"><em>Fields Institute</em></a></li>
-	
-        <li>Jiaxun Li <a href="./static/LanguageGeneration-Jiaxun.pdf">[slides]</a> and Vinod Raman <a href="./static/LanguageGeneration-Vinod.pdf">[slides]</a>:&nbsp; "Generation Through the Lens of Learning Theory"</li>
-        <li>Chirag Pabbaraju <a href="./static/LanguageGeneration-Chirag.pdf">[slides]</a>:&nbsp; "Exploring Facets of Language Generation in the Limit"</li>
-        <li>Anay Mehrotra and Grigoris Velegkas:&nbsp; <a href="https://www.youtube.com/watch?v=kBsTBL7jB4A"><em>"On the Limits of Language Generation"</em></a> — STOC online talk <a href="./static/LanguageGeneration-Anay-Grigoris-STOC25.pdf">[slides]</a> (for more recent results, but only in the online setting, see: <a href="./static/LanguageGeneration-Grigoris.pdf">[slides 1]</a> <a href="./static/LanguageGeneration-Anay.pdf">[slides 2]</a>)</li>
-        <li>
-          Jon Kleinberg:&nbsp; <a href="https://icml.cc/virtual/2025/invited-talk/39862"><em>"AI's Models of the World, and Ours"</em></a> at ICML (Invited Talk; Registration Required)
-        </li>
-		<li>
-			Jon Kleinberg:&nbsp; <a href="https://neurips.cc/virtual/2025/loc/san-diego/workshop/109569"><em>Capturing the Tension between Hallucination and Mode Collapse in a Model of Language Generation</em></a> at NeurIPS Workshop on What Can('t) Transformers Do? (Invited Talk; Registration Required)
-		</li>
-      </ul>
-    </section> 
- 
+      <div class="talk-card talk-combined">
+        <div class="talk-header">
+          <div class="talk-info">
+            <h3 class="talk-title">Talks 3 & 4: Validity–Breadth Trade-Off (Parts I & II)</h3>
+            <span class="talk-speaker">Anay Mehrotra & Grigoris Velegkas</span>
+          </div>
+          <div class="talk-actions-top">
+            <button class="pdf-btn" type="button" data-pdf="./static/tutorial-slides/Slides-Talk-3-Anay.pdf">
+              <i class="fa-solid fa-file-pdf"></i> Part I Slides
+            </button>
+            <button class="pdf-btn" type="button" data-pdf="./static/tutorial-slides/Slides-Talk-4-Grigoris.pdf">
+              <i class="fa-solid fa-file-pdf"></i> Part II Slides
+            </button>
+          </div>
+        </div>
+        <div class="talk-content">
+          <div class="video-wrapper">
+            <iframe data-src="https://www.youtube.com/embed/-LHEymSNA2k" 
+                    title="Talks 3 & 4: Validity–Breadth Trade-Off" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <div class="talk-header">
+          <div class="talk-info">
+            <h3 class="talk-title">Talk 5: Diverse and Robust Generation</h3>
+            <span class="talk-speaker">Charlotte Peale</span>
+          </div>
+          <button class="pdf-btn" type="button" data-pdf="./static/tutorial-slides/Slides-Talk-5-Charlotte.pdf">
+            <i class="fa-solid fa-file-pdf"></i> View Slides
+          </button>
+        </div>
+        <div class="talk-content">
+          <div class="video-wrapper">
+            <iframe data-src="https://www.youtube.com/embed/5bO2OSc5LKg" 
+                    title="Talk 5: Diverse and Robust Generation" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section id="resources">
+  <h2><i class="fas fa-book-open" style="color:var(--text-color)"></i>Resources</h2>
+
+  <p>Alongside the COLT 2025 tutorial, we are preparing a reading list for participants exploring language generation in greater depth. Below is a list of recent (and rapidly growing) lines of works on language generation in the limit. The list is being actively updated, please check back for new papers (and email Anay to add papers to this list).</p>
+
+  <!-- Search UI applies ONLY to generation papers -->
+  <div class="paper-controls" role="region" aria-label="Reading list controls">
+    <div class="paper-controls-row">
+      <label class="paper-search-label" for="paper-search">Search</label>
+      <input id="paper-search" class="paper-search" type="search" placeholder="Title, author, venue, tag…" autocomplete="off">
+      <button id="paper-clear" class="paper-clear" type="button" title="Clear search and filters">
+        <i class="fa-solid fa-xmark"></i> Clear
+      </button>
+    </div>
+
+    <div class="paper-controls-row paper-controls-row-2">
+      <div class="paper-sort">
+        <label for="paper-sort">Sort</label>
+        <select id="paper-sort">
+          <option value="desc">Newest first</option>
+          <option value="asc">Oldest first</option>
+        </select>
+      </div>
+
+      <span id="paper-count" class="paper-count" aria-live="polite"></span>
+    </div>
+
+    <div id="paper-tag-bar" class="paper-tag-bar" aria-label="Filter by tag"></div>
+  </div>
+
+  <!-- JS renders generation papers here -->
+  <div id="paper-results"></div>
+
+  <br><br>
+  <b>Relevant Talks</b>
+  <ul>
+    <li>Jon Kleinberg:&nbsp; "Language Generation in the Limit" at <a href="https://simons.berkeley.edu/talks/jon-kleinberg-cornell-university-2024-09-25"><em>Simons Institute</em>,</a> <a href="https://www.ias.edu/video/language-generation-limit"><em>IAS</em>,</a> and <a href="https://www.youtube.com/watch?v=VGqlKwIkDk8&list=PLArBKNfJxuunT9mVhqMjZM1qA6rs1cxGO"><em>Fields Institute</em></a></li>
+    <li>Jiaxun Li <a href="./static/LanguageGeneration-Jiaxun.pdf">[slides]</a> and Vinod Raman <a href="./static/LanguageGeneration-Vinod.pdf">[slides]</a>:&nbsp; "Generation Through the Lens of Learning Theory"</li>
+    <li>Chirag Pabbaraju <a href="./static/LanguageGeneration-Chirag.pdf">[slides]</a>:&nbsp; "Exploring Facets of Language Generation in the Limit"</li>
+    <li>Anay Mehrotra and Grigoris Velegkas:&nbsp; <a href="https://www.youtube.com/watch?v=kBsTBL7jB4A"><em>"On the Limits of Language Generation"</em></a> — STOC online talk <a href="./static/LanguageGeneration-Anay-Grigoris-STOC25.pdf">[slides]</a> (for more recent results, but only in the online setting, see: <a href="./static/LanguageGeneration-Grigoris.pdf">[slides 1]</a> <a href="./static/LanguageGeneration-Anay.pdf">[slides 2]</a>)</li>
+    <li>Jon Kleinberg:&nbsp; <a href="https://icml.cc/virtual/2025/invited-talk/39862"><em>"AI's Models of the World, and Ours"</em></a> at ICML (Invited Talk; Registration Required)</li>
+    <li>Jon Kleinberg:&nbsp; <a href="https://neurips.cc/virtual/2025/loc/san-diego/workshop/109569"><em>Capturing the Tension between Hallucination and Mode Collapse in a Model of Language Generation</em></a> at NeurIPS Workshop on What Can('t) Transformers Do? (Invited Talk; Registration Required)</li>
+  </ul>
+
+  <br><br>
+  <b>Selected works on language identification in the limit</b>
+  <ul>
+    <li><a href="https://www.sciencedirect.com/science/article/pii/S0019995867911655"><em>Language Identification in the Limit</em></a> — <span class="citation">E. Mark Gold <span class="badge">Information and Control 1967</span></span></li>
+    <li><a href="https://www.sciencedirect.com/science/article/pii/S0019995880902855"><em>Inductive Inference of Formal Languages from Positive Data</em></a> — <span class="citation">Dana Angluin <span class="badge">Information and Control 1980</span></span></li>
+    <li><a href="https://doi.org/10.1145/800135.804406"><em>Finding Patterns Common to a Set of Strings</em></a> — <span class="citation">Dana Angluin <span class="badge">STOC 1979</span></span></li>
+    <li><a href="https://dl.acm.org/doi/abs/10.1145/356914.356918"><em>Inductive Inference: Theory and Methods</em></a> — <span class="citation">Dana Angluin and Carl H. Smith <span class="badge">ACM Computing Survey 1983</span></span></li>
+    <li><a href="https://www.sciencedirect.com/science/article/pii/S0304397508001503"><em>Learning indexed families of recursive languages from positive data: A survey</em></a> — <span class="citation">Steffen Lange, Thomas Zeugmann, and Thomas Zeugmann <span class="badge">TCS</span></span></li>
+    <li><a href="https://en.wikipedia.org/wiki/Language_identification_in_the_limit"><em>Language identification in the limit</em></a> — <span class="citation"><span class="badge">Wikipedia</span></span></li>
+  </ul>
+  <br><br>
+</section>
+
+
+
 
 <!-- ▶▶ MODAL OVERLAY -------------------------------------------------->
 <div id="pdf-modal" class="pdf-modal">
@@ -462,10 +643,14 @@
 
 <!-- ▶ SCRIPT --------------------------------------------------------->
 <script>
-  document.addEventListener('DOMContentLoaded', function(){
-    // Open modal for PDF viewing
+  document.addEventListener('DOMContentLoaded', function () {
+
+    /* =========================
+       PDF MODAL
+       ========================= */
     document.querySelectorAll('.pdf-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
         const pdfPath = this.getAttribute('data-pdf');
         const modal   = document.getElementById('pdf-modal');
         const frame   = document.getElementById('pdf-frame');
@@ -477,7 +662,6 @@
       });
     });
 
-    // Close modal helpers
     function closeModal(){
       const modal = document.getElementById('pdf-modal');
       const frame = document.getElementById('pdf-frame');
@@ -485,19 +669,373 @@
       frame.src = '';
       document.body.style.overflow = '';
     }
-    document.getElementById('pdf-close').addEventListener('click', closeModal);
-    document.getElementById('pdf-modal').addEventListener('click', function(e){
-      if(e.target === this) closeModal();
-    });
+
+    const pdfClose = document.getElementById('pdf-close');
+    if (pdfClose) pdfClose.addEventListener('click', closeModal);
+
+    const pdfModal = document.getElementById('pdf-modal');
+    if (pdfModal) {
+      pdfModal.addEventListener('click', function(e){
+        if(e.target === this) closeModal();
+      });
+    }
+
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape') closeModal();
     });
+
+
+    /* =========================
+       ONE TOGGLE FOR ALL TALKS
+       ========================= */
+    const talksToggle  = document.getElementById('talks-toggle');
+    const talksWrapper = document.getElementById('talks-wrapper');
+
+    function setTalksOpen(isOpen) {
+      if (!talksToggle || !talksWrapper) return;
+
+      if (isOpen) {
+        talksWrapper.removeAttribute('hidden');
+        talksToggle.setAttribute('aria-expanded', 'true');
+        talksToggle.innerHTML = '<i class="fa-solid fa-chevron-up"></i> Hide videos and materials';
+
+        // Lazy-load all iframes when opening
+        talksWrapper.querySelectorAll('iframe[data-src]').forEach(function(iframe){
+          if (!iframe.getAttribute('src')) {
+            iframe.setAttribute('src', iframe.getAttribute('data-src'));
+          }
+        });
+      } else {
+        talksWrapper.setAttribute('hidden', '');
+        talksToggle.setAttribute('aria-expanded', 'false');
+        talksToggle.innerHTML = '<i class="fa-solid fa-chevron-down"></i> Show videos and materials';
+
+        // Stop playback when hiding
+        talksWrapper.querySelectorAll('iframe').forEach(function(iframe){
+          if (iframe.getAttribute('src')) {
+            iframe.setAttribute('src', '');
+          }
+        });
+      }
+    }
+
+    if (talksToggle && talksWrapper) {
+      setTalksOpen(false);
+      talksToggle.addEventListener('click', function(){
+        const isOpen = talksToggle.getAttribute('aria-expanded') === 'true';
+        setTalksOpen(!isOpen);
+      });
+    }
+
+
+    /* =========================
+       SEARCHABLE GENERATION PAPERS
+       (single chronological list)
+       ========================= */
+
+    const papers = [
+      {
+        title: "Language Generation in the Limit",
+        url: "https://arxiv.org/abs/2404.06757",
+        authors: "Jon Kleinberg and Sendhil Mullainathan",
+        badge: "NeurIPS 2024",
+        date: "2024-04-01",
+        tags: []
+      },
+      {
+        title: "Generation through the Lens of Learning Theory",
+        url: "https://arxiv.org/abs/2410.13714",
+        authors: "Jiaxun Li, Vinod Raman, and Ambuj Tewari",
+        badge: "COLT 2025",
+        date: "2024-10-01",
+        tags: ["uncountable"]
+      },
+      {
+        title: "On the Limits of Language Generation: Trade-Offs Between Hallucination and Mode Collapse",
+        url: "https://arxiv.org/abs/2411.09642",
+        authors: "Alkis Kalavasis, Anay Mehrotra, and Grigoris Velegkas",
+        badge: "STOC 2025",
+        date: "2024-11-01",
+        tags: ["breadth", "statiatical"]
+      },
+      {
+        title: "Exploring Facets of Language Generation in the Limit",
+        url: "https://arxiv.org/abs/2411.15364",
+        authors: "Moses Charikar and Chirag Pabbaraju",
+        badge: "COLT 2025",
+        date: "2024-11-01",
+        tags: ["breadth", "feedback"]
+      },
+      {
+        title: "Characterizations of Language Generation With Breadth",
+        url: "https://arxiv.org/abs/2412.18530",
+        authors: "Alkis Kalavasis, Anay Mehrotra, and Grigoris Velegkas",
+        badge: "ALT 2026",
+        date: "2024-12-01",
+        tags: ["breadth"]
+      },
+      {
+        title: "Generation from Noisy Examples",
+        url: "https://arxiv.org/abs/2501.04179",
+        authors: "Ananth Raman and Vinod Raman",
+        badge: "ICML 2025",
+        date: "2025-01-01",
+        tags: ["contamination", "uncountable"]
+      },
+      {
+        title: "Density Measures for Language Generation",
+        url: "https://arxiv.org/abs/2504.14370",
+        authors: "Jon Kleinberg and Fan Wei",
+        badge: "FOCS 2025",
+        date: "2025-04-01",
+        tags: ["density", "breadth"]
+      },
+      {
+        title: "Representative Language Generation",
+        url: "https://arxiv.org/abs/2505.21819",
+        authors: "Charlotte Peale, Vinod Raman, and Omer Reingold",
+        badge: "ICML 2025",
+        date: "2025-05-01",
+        tags: ["representation", "breadth", "uncountable"]
+      },
+      {
+        title: "On Union-Closedness of Language Generation",
+        url: "https://arxiv.org/abs/2506.18642",
+        authors: "Steve Hanneke, Amin Karbasi, Anay Mehrotra, and Grigoris Velegkas",
+        badge: "NeurIPS 2025",
+        date: "2025-06-01",
+        tags: ["closure", "uncountable"]
+      },
+      {
+        title: "Language Generation in the Limit: Noise, Loss, and Feedback",
+        url: "https://arxiv.org/abs/2507.15319",
+        authors: "Yannan Bai, Debmalya Panigrahi, Ian Zhang",
+        badge: "SODA 2026",
+        date: "2025-07-01",
+        tags: ["contamination", "closure", "feedback", "uncountable"]
+      },
+      {
+        title: "Pareto-optimal Non-uniform Language Generation",
+        url: "https://arxiv.org/abs/2510.02795",
+        authors: "Moses Charikar and Chirag Pabbaraju",
+        badge: "ALT 2026",
+        date: "2025-10-01",
+        tags: ["non-uniform"]
+      },
+      {
+        title: "Language Generation and Identification From Partial Enumeration: Tight Density Bounds and Topological Characterizations",
+        url: "https://arxiv.org/abs/2511.05295",
+        authors: "Jon Kleinberg and Fan Wei",
+        badge: "arXiv 2025",
+        date: "2025-11-01",
+        tags: ["density", "breadth"]
+      },
+      {
+        title: "Language Generation: Complexity Barriers and Implications for Learning",
+        url: "https://arxiv.org/abs/2511.05759",
+        authors: "Marcelo Arenas, Pablo Barceló, Luis Cofré, Alexander Kozachinskiy",
+        badge: "arXiv 2025",
+        date: "2025-11-01",
+        tags: ["sample complexity"]
+      },
+      {
+        title: "Language Generation with Infinite Contamination",
+        url: "https://arxiv.org/abs/2511.07417",
+        authors: "Anay Mehrotra, Grigoris Velegkas, Xifan Yu, and Felix Zhou",
+        badge: "arXiv 2025",
+        date: "2025-11-01",
+        tags: ["contamination", "density", "robustness", "breadth"]
+      },
+	{
+  title: "(Im)possibility of Automated Hallucination Detection in Large Language Models",
+  url: "https://arxiv.org/abs/2504.17004",
+  authors: "Amin Karbasi, Omar Montasser, John Sous, and Grigoris Velegkas",
+  badge: "COLM 2025",
+  date: "2025-04-23",
+  tags: ["hallucination", "detection", "evaluation"]
+},
+{
+  title: "Safe Language Generation in the Limit",
+  url: "https://arxiv.org/abs/2601.08648",
+  authors: "Antonios Anastasopoulos, Giuseppe Ateniese, and Evgenios M. Kornaropoulos",
+  badge: "arXiv 2026",
+  date: "2026-01-13",
+  tags: ["safety", "generation"]
+},
+{
+  title: "Quantifying Noise in Language Generation",
+  url: "https://arxiv.org/abs/2601.21237",
+  authors: "Aaron Li and Ian Zhang",
+  badge: "arXiv 2026",
+  date: "2026-01-29",
+  tags: ["noise", "quantification"]
+},
+    ];
+
+    const state = {
+      q: "",
+      activeTags: new Set(),
+      sort: "asc"
+    };
+
+    function norm(s) {
+      return (s || "").toString().toLowerCase().trim();
+    }
+
+    function dateKey(p) {
+      if (p.date) {
+        const ms = Date.parse(p.date);
+        if (!Number.isNaN(ms)) return ms;
+      }
+      return 0;
+    }
+
+    function escapeHtml(s) {
+      return (s || "").toString()
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    const papersWithKeys = papers.map(function(p){
+      return {
+        ...p,
+        _dateKey: dateKey(p),
+        _search: norm([p.title, p.authors, p.badge, (p.tags || []).join(" ")].join(" "))
+      };
+    });
+
+    const elSearch = document.getElementById("paper-search");
+    const elClear  = document.getElementById("paper-clear");
+    const elSort   = document.getElementById("paper-sort");
+    const elCount  = document.getElementById("paper-count");
+    const elTags   = document.getElementById("paper-tag-bar");
+    const elOut    = document.getElementById("paper-results");
+
+    if (!elSearch || !elClear || !elSort || !elCount || !elTags || !elOut) {
+      return;
+    }
+
+    function matches(p) {
+      if (state.q && !p._search.includes(norm(state.q))) return false;
+
+      if (state.activeTags.size > 0) {
+        const pTags = new Set((p.tags || []).map(norm));
+        for (const t of state.activeTags) {
+          if (!pTags.has(t)) return false; // AND semantics
+        }
+      }
+      return true;
+    }
+
+    function cmp(a, b) {
+      if (state.sort === "asc") return a._dateKey - b._dateKey;
+      return b._dateKey - a._dateKey;
+    }
+
+    function uniqTags(items) {
+      const m = new Map();
+      items.forEach(function(p){
+        (p.tags || []).forEach(function(t){
+          m.set(norm(t), t);
+        });
+      });
+      return Array.from(m.entries())
+        .map(function([key, display]){ return { key, display }; })
+        .sort(function(a, b){ return a.key.localeCompare(b.key); });
+    }
+
+    function renderTagBar(allItems) {
+      const tags = uniqTags(allItems);
+      elTags.innerHTML = "";
+
+      tags.forEach(function(t){
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "tag-chip" + (state.activeTags.has(t.key) ? " active" : "");
+        btn.textContent = t.display;
+        btn.setAttribute("data-tag", t.key);
+        elTags.appendChild(btn);
+      });
+    }
+
+    function renderPapers(items) {
+      const filtered = items.filter(matches).sort(cmp);
+      elCount.textContent = "Showing " + filtered.length + " of " + items.length;
+
+      if (filtered.length === 0) {
+        elOut.innerHTML = "<p><em>No matching papers. Try clearing tags or adjusting the search query.</em></p>";
+        return;
+      }
+
+      let html = '<ul class="paper-list">';
+      filtered.forEach(function(p){
+        const authorsPart = p.authors ? ('<span class="citation">' + escapeHtml(p.authors) + ' </span>') : "";
+        const badgePart = p.badge ? ('<span class="badge">' + escapeHtml(p.badge) + '</span>') : "";
+        const meta = '<span class="paper-meta">' + authorsPart + badgePart + "</span>";
+
+        const tags = (p.tags || []).map(function(t){
+          const key = norm(t);
+          return '<button type="button" class="paper-tag" data-tag="' + escapeHtml(key) + '">' + escapeHtml(t) + "</button>";
+        }).join("");
+
+        html += '<li class="paper-item">';
+        html += '<a href="' + escapeHtml(p.url) + '"><em>' + escapeHtml(p.title) + '</em></a> ' + meta;
+        if (tags) html += '<div class="paper-tags">' + tags + "</div>";
+        html += "</li>";
+      });
+      html += "</ul>";
+
+      elOut.innerHTML = html;
+    }
+
+    function clearAll() {
+      state.q = "";
+      state.activeTags.clear();
+      elSearch.value = "";
+      renderTagBar(papersWithKeys);
+      renderPapers(papersWithKeys);
+    }
+
+    elSearch.addEventListener("input", function () {
+      state.q = elSearch.value || "";
+      renderPapers(papersWithKeys);
+    });
+
+    elSort.addEventListener("change", function () {
+      state.sort = elSort.value;
+      renderPapers(papersWithKeys);
+    });
+
+    elClear.addEventListener("click", clearAll);
+
+    document.addEventListener("click", function (e) {
+      const t = e.target.closest("[data-tag]");
+      if (!t) return;
+
+      const tag = t.getAttribute("data-tag");
+      if (!tag) return;
+
+      if (state.activeTags.has(tag)) state.activeTags.delete(tag);
+      else state.activeTags.add(tag);
+
+      renderTagBar(papersWithKeys);
+      renderPapers(papersWithKeys);
+    });
+
+    renderTagBar(papersWithKeys);
+    renderPapers(papersWithKeys);
   });
 </script>
 
 
 
-    <!-- === ORGANIZERS === -->
+
+
+
+<!-- === ORGANIZERS === -->
   <section id="organizers">
     <h2><i class="fas fa-user-friends" style="color:var(--text-color)"></i>Organizers</h2>
     <div class="card-grid">
@@ -544,8 +1082,9 @@
   </section>
 
   <!-- ======= FOOTER ======= -->
-  <footer>
-    COLT 2025  Tutorial • Last updated December 9, 2025 by Anay Mehrotra 
-  </footer>
+<footer>
+  COLT 2025 Tutorial &#9675; Maintained by Anay Mehrotra &#9675; Last updated December 9, 2025
+</footer>
+
 </body>
 </html>
